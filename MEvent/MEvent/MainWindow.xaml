@@ -6,8 +6,11 @@
         xmlns:local="clr-namespace:MEvent"
         mc:Ignorable="d"
         KeyDown="MainWindow_OnKeyDown"
+        MouseMove="MainWindow_OnMouseMove"
+        MouseLeftButtonUp="MainWindow_OnMouseLeftButtonUp"
+        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown"
         Title="MOUSE EVENT" Height="450" Width="800">
     <Canvas>
-        
+        <TextBlock Background="AntiqueWhite"  x:Name="console" Width="772" Height="250" TextWrapping="Wrap" Canvas.Left="10" Canvas.Top="159"></TextBlock>
     </Canvas>
 </Window>
