@@ -119,15 +119,16 @@ public class MouseOperations
             PointF curPoint = new PointF(Convert.ToInt32(start.X + timeFraction * deltaX),
                 Convert.ToInt32(start.Y + timeFraction * deltaY));
 
-            //MouseOperations.SetCursorPos(Convert.ToInt32(curPoint.X), Convert.ToInt32(curPoint.Y));
-            // MouseSimulator.MouseMove(Convert.ToInt32(curPoint.X), Convert.ToInt32(curPoint.Y));
-            int inputXinPixels = Convert.ToInt32(curPoint.X);
-            int inputYinPixels = Convert.ToInt32(curPoint.Y);
-            var screenBounds = Screen.PrimaryScreen.Bounds;
-            var outputX = inputXinPixels * 65535 / screenBounds.Width;
-            var outputY = inputYinPixels * 65535 / screenBounds.Height;
-            MouseOperations.mouseMove(outputX, outputY);
-            Thread.Sleep(20);
+            MouseOperations.SetCursorPos(Convert.ToInt32(curPoint.X), Convert.ToInt32(curPoint.Y));
+            //MouseSimulator.MouseMove(Convert.ToInt32(curPoint.X), Convert.ToInt32(curPoint.Y));
+            //int inputXinPixels = Convert.ToInt32(curPoint.X);
+            //int inputYinPixels = Convert.ToInt32(curPoint.Y);
+            //var screenBounds = Screen.PrimaryScreen.Bounds;
+            //var outputX = inputXinPixels * 65535 / screenBounds.Width;
+            //var outputY = inputYinPixels * 65535 / screenBounds.Height;
+            //Console.WriteLine(outputX);
+            //MouseSimulator.MouseMove(outputX, outputY);
+            Thread.Sleep(50);
         } while (timeFraction < 1.0);
     }
 
