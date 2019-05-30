@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -119,5 +120,22 @@ namespace MEvent
 
             writeEvent(my);
         }
+
+        private void work(object sender, RoutedEventArgs e)
+        {
+            Thread.Sleep(2000);
+            record = true;
+            //MouseOperations.mouseClick();
+            System.Drawing.Point start = new System.Drawing.Point(400, 400);
+
+            MouseOperations.LinearSmoothMove(start, new TimeSpan(0, 0, 1));
+        }
+
+
+        //            Thread.Sleep(5000);
+        //Point start = new Point(100, 100);
+        //LinearSmoothMove(start, new TimeSpan(0,0,1));
+        //    SendKeys.SendWait("^+{TAB}");
+        //    LinearSmoothMove(start, new TimeSpan(0, 0, 1));
     }
 }

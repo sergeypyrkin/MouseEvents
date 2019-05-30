@@ -11,6 +11,8 @@
         MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown"
         Title="MOUSE EVENT" Height="450" Width="800">
     <Canvas>
+        <Button Width="100" Height="100
+                " Click="work" Canvas.Left="641" Canvas.Top="31" Content="!!!"></Button>
         <TextBlock Background="AntiqueWhite"  x:Name="console" Width="772" Height="250" TextWrapping="Wrap" Canvas.Left="10" Canvas.Top="159"></TextBlock>
     </Canvas>
 </Window>
