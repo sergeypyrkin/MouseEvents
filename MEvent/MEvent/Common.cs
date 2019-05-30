@@ -1,7 +1,11 @@
 ﻿
 using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Common
 {
@@ -43,7 +47,46 @@ namespace Common
             mouseMove.mkhi.mi.dy = dy;
             User32.SendInput(1, ref mouseMove, Marshal.SizeOf(new INPUT()));
         }
+
+        public static void LinearSmoothMove(System.Drawing.Point newPosition, TimeSpan duration)
+        {
+            var point = MouseOperations.GetCursorPosition();
+            System.Drawing.Point start = new System.Drawing.Point(point.X, point.Y);
+
+            // Find the vector between start and newPosition
+            double deltaX = newPosition.X - start.X;
+            double deltaY = newPosition.Y - start.Y;
+
+            // start a timer
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            double timeFraction = 0.0;
+
+            do
+            {
+                timeFraction = (double)stopwatch.Elapsed.Ticks / duration.Ticks;
+                if (timeFraction > 1.0)
+                    timeFraction = 1.0;
+
+                PointF curPoint = new PointF(Convert.ToInt32(start.X + timeFraction * deltaX),
+                    Convert.ToInt32(start.Y + timeFraction * deltaY));
+
+                //MouseOperations.SetCursorPos(Convert.ToInt32(curPoint.X), Convert.ToInt32(curPoint.Y));
+                //MouseSimulator.MouseMove(Convert.ToInt32(curPoint.X), Convert.ToInt32(curPoint.Y));
+                int inputXinPixels = Convert.ToInt32(curPoint.X);
+                int inputYinPixels = Convert.ToInt32(curPoint.Y);
+                var screenBounds = Screen.PrimaryScreen.Bounds;
+                var outputX = inputXinPixels * 65535 / screenBounds.Width;
+                var outputY = inputYinPixels * 65535 / screenBounds.Height;
+                //Console.WriteLine(outputX);
+                MouseSimulator.MouseMove(outputX, outputY);
+                Thread.Sleep(50);
+            } while (timeFraction < 1.0);
+        }
     }
+
+
 
     [StructLayout(LayoutKind.Sequential)]
     public struct POINT
